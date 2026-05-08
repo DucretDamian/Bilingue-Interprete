@@ -1,0 +1,438 @@
+-----------------------------------------------
+Para <Programa> ::= "biliprograma" "id" ";" <Declaracion> <Cuerpo> "biliend" ";"
+
+Primero("biliprograma") = {"biliprograma"}
+-----------------------------------------------
+Para <Cuerpo> ::= <Sent> ";" <Cuerpo>
+
+R = {"id", "idm", "if", "while", "escribir", "leer"}
+Primero(<Sent>) = 
+Primero(<Asignacion>) = {"id", "idm"}
+Primero(<Condicional>) = {"if"}
+Primero(<Ciclo>) = {"while"}
+Primero(<Escritura>) = {"escribir"}
+Primero(<Lectura>) = {"leer"}
+-----------------------------------------------
+Para <Cuerpo> ::= e
+
+|CREO QUE NO DEBERIA IR $|
+
+Primero(e) = {e}
+Siguiente(<Cuerpo>) = {"biliend", "end", "else"}
+-----------------------------------------------
+Para <Sent> ::= <Asignacion>
+
+Primero(<Asignacion>) = {"id", "idm"}
+-----------------------------------------------
+Para <Sent> ::= <Condicional>
+
+Primero(<Condicional>) = {"if"}
+-----------------------------------------------
+Para <Sent> ::= <Ciclo>
+
+Primero(<Ciclo>) = {"while"}
+-----------------------------------------------
+Para <Sent> ::= <Escritura>
+
+Primero(<Escritura>) = {"escribir"}
+-----------------------------------------------
+Para <Sent> ::= <Lectura>
+
+Primero(<Lectura>) = {"leer"}
+-----------------------------------------------
+Para <Asignacion> ::= "id" "opasig" <EASumRes>
+
+Primero("id") = {"id"}
+-----------------------------------------------
+Para <Asignacion> ::= "idm" <AsignacionT>
+
+Primero("idm") = {"idm"}
+-----------------------------------------------
+Para <AsignacionT> ::= "opasig" <EMSumRes>
+
+Primero("opasig") = {"opasig"}
+-----------------------------------------------
+Para <AsignacionT> ::= "[" <EASumRes> ";" <EASumRes> "]" "opasig" <EASumRes>
+
+Primero("[") = {"["}
+-----------------------------------------------
+Para <Condicional> ::= "if" “(“ <CondAnd> “)” "then" <Cuerpo> <CondicionalF>
+
+Primero("if") = {"if"}
+-----------------------------------------------
+Para <CondicionalF> ::= "end"
+
+Primero("end") = {"end"}
+-----------------------------------------------
+Para <CondicionalF> ::= "else" <Cuerpo> "end"
+
+Primero("else") = {"else"}
+-----------------------------------------------
+Para <Ciclo> ::= "while" “(“ <CondAnd> “)”  "do" <Cuerpo> "end"
+
+Primero("while") = {"while"}
+-----------------------------------------------
+Para <CondAnd> ::= <CondOr> <CondAndT>
+
+Primero(<CondOr>) =
+Primero(<CondNot>) = 
+Primero("not") = {"not"}
+Primero(<EC>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-", "["}
+Primero(<EASumRes>) =
+Primero(<EAMultDiv>) =
+Primero(<EAPotRaiz>) =
+Primero(<Factor>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+Primero("[") = {"["}
+-----------------------------------------------
+Para <CondAndT> ::= “and” <CondOr> <CondAndT>
+
+Primero("and") = {"and"}
+-----------------------------------------------
+Para <CondAndT> ::= e
+
+Primero(e) = {e}
+Siguiente(<CondAndT>) =
+Siguiente(<CondAnd>) = {")", "]"}
+-----------------------------------------------
+Para <CondOr> ::= <CondNot> <CondOrT> 
+
+Resultado = {"not", "constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-", "["}
+Primero(<CondNot>) = 
+Primero("not") = {"not"}
+Primero(<EC>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-", "["}
+-----------------------------------------------
+Para <CondOrT> ::=  "or" <CondNot> <CondOrT>
+
+Primero("or") = {"or"}
+-----------------------------------------------
+Para <CondOrT> ::= e 
+
+Resultado = {"and", ")", "]"}
+Primero(e) = {e}
+Siguiente(<CondOrT>) =
+Siguiente(<CondOr>) = 
+Primero(<CondAndT>) = {"and"}
+Primero(e) = {e}
+Siguiente(<CondAndT>) = 
+Siguiente(<CondAnd>) = {")", "]"}
+-----------------------------------------------
+Para <CondNot> ::= "not" <CondNot> 
+
+Primero("not") = {"not"}
+-----------------------------------------------
+Para <CondNot> ::= <EC> 
+
+Primero(<EC>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-", "["}
+-----------------------------------------------
+Para <EC> ::= <EASumRes> "OpRel” <EASumRes>
+
+Primero(<EASumRes>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+-----------------------------------------------
+Para <EC> ::= "[" <CondAnd> "]" 
+
+Primero("[") = {"["}
+-----------------------------------------------
+Para <EASumRes> ::= <EAMultDiv> <EASumResT> 
+
+Primero(<EAMultDiv>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+-----------------------------------------------
+Para <EASumResT> ::= "+" <EAMultDiv> <EASumResT>
+
+Primero("+") = {"+"}
+-----------------------------------------------
+//NO VA EL MENOS
+Para <EASumResT> ::= "-" <EAMultDiv> <EASumResT>
+
+Primero("-") = {"-"}
+-----------------------------------------------
+Para <EASumResT> ::= e
+
+Resultado = {";", "]", "OpRel”, "or", "and", ")", ",","}"}
+Primero(e) = {e}
+Siguiente(<EASumResT>) =
+Siguiente(<EASumRes>) = {";", "]", "OpRel”, ",","}"}
+Siguiente(<AsignacionT>) =
+Siguiente(<Asignacion>) =
+Siguiente(<Sent>) =
+Siguiente(<EC>) = 
+Siguiente(<CondNot>) = 
+Primero(<CondOrT>) = {"or"}
+Primero(e)
+Siguiente(<CondOrT>) = 
+Siguiente(<CondOr>) =
+Primero(<CondAndT>) = {"and"}
+Primero(e) = 
+Siguiente(<CondAndT>) =
+Siguiente(<CondAnd>) = {")", "]"}
+-----------------------------------------------
+Para <EAMultDiv> ::= <EAPotRaiz> <EAMultDivT>
+
+Primero(<EAPotRaiz>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+-----------------------------------------------
+Para <EAMultDivT> ::= "*" <EAPotRaiz> <EAMultDivT>
+
+Primero("*") = {"*"}
+-----------------------------------------------
+Para <EAMultDivT> ::= "/" <EAPotRaiz> <EAMultDivT>
+
+Primero("/") = {"/"}
+-----------------------------------------------
+Para <EAMultDivT> ::= e
+
+//NO VA EL MENOS
+
+Resultado = {",", ";", "+", "-", "]", "OpRel”, "or", "and", ")", "}"}
+Primero(e) = 
+Siguiente(<EAMultDivT>) = 
+Siguiente(<EAMultDiv>) = 
+Primero(<EASumResT>) = {"+", "-"}
+Primero(e) = 
+Siguiente(<EASumResT>) = {";", "]", "OpRel”, "or", "and", ")"}
+Siguiente(<AsignacionT>) = 
+Siguiente(<Asignacion>) =
+Primero(";") = {";"}
+Siguiente(<DatoEscr>) =
+Primero(<ListDatoEscrF>) = {","}
+Primero(e) = {e}
+Siguiente(<ListDatoEscrF>) =
+Siguiente(<ListDatoEscr>) =
+Primero(")") = {")"}
+Primero(<ColumnasT>) = {","}
+Primero(e) = 
+Siguiente(<ColumnasT>) = 
+Siguiente(<Columnas>) =
+Primero("}") = {"}"}
+-----------------------------------------------
+Para <EAPotRaiz> ::= <Factor> <EAPotRaizT>
+
+Primero(<Factor>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+-----------------------------------------------
+Para <Factor> ::= "constreal"
+
+Primero("constreal") = {"constreal"}
+-----------------------------------------------
+Para <Factor> ::= "id"
+
+Primero("id") = {"id"}
+-----------------------------------------------
+Para <Factor> ::= <EMD>
+
+Primero(<EMD>) = {"idm"}
+-----------------------------------------------
+Para <Factor> ::= "(" <EASumRes> ")"
+
+Primero("(") = {"("}
+-----------------------------------------------
+Para <Factor> ::= “sizeCol” “(“ “idm” “)
+
+Primero(“sizeCol”) = {“sizeCol”}
+-----------------------------------------------
+Para <Factor> ::= “sizeFila” “(“ “idm” “)”
+
+Primero("sizeFila") = {"sizeFila"}
+-----------------------------------------------
+Para <Factor> ::= "-" <Factor> 
+
+Primero("-") = {"-"}
+-----------------------------------------------
+Para <EAPotRaizT> ::= “**” <Factor> <EAPotRaizT>
+
+Primero("**") = {"**"}
+-----------------------------------------------
+Para <EAPotRaizT> ::= “rqz” <Factor> <EAPotRaizT>
+
+Primero("rqz") = {"rqz"}
+-----------------------------------------------
+Para <EAPotRaizT> ::= e
+
+//NO VA EL MENOS
+
+Resultado = {"+", "-", "*", "/", ";", "]", "OpRel”, "or", "and", ")",",","}"}
+Primero(e) = e
+Siguiente(<EAPotRaizT>) = 
+Siguiente(<EAPotRaiz>) = 
+Primero(<EAMultDivT>) = {"*", "/"}
+Primero(e) = {e}
+Siguiente(<EAMultDivT>) = 
+Siguiente(<EAMultDiv>) =
+Primero(<EASumResT>) = {"+", "-"}
+Primero(e) = {e}
+Siguiente(<EASumResT>) = {";", "]", "OpRel”, "or", "and", ")",",","}"}
+-----------------------------------------------
+Para <Declaracion> ::=  "dec" <DeclaracionF> "decend" ";"
+
+Primero("dec") = {"dec"}
+-----------------------------------------------
+Para <Declaracion> ::=  e
+
+Resultado = {"id", "idm", "if", "while", "escribir", "leer", "biliend", "end", "else"}
+Primero(e) = {e}
+Siguiente(<Declaracion>) = 
+Primero(<Cuerpo>) = {"id", "idm", "if", "while", "escribir", "leer", "biliend", "end", "else"}
+-----------------------------------------------
+Para <DeclaracionF> ::=  "id" ":" "Real" ";" <DeclaracionF> 
+
+Primero("id") = {"id"}
+-----------------------------------------------
+Para <DeclaracionF> ::=  "idm" ":" "matrix" "[" "constreal" “;” "constreal" “]” ";" <DeclaracionF>
+
+Primero("idm") = {"idm"}
+-----------------------------------------------
+Para <DeclaracionF> ::=  e
+
+Primero(e) = {e}
+Siguiente(<DeclaracionF>) = {"decend"}
+Primero("decend") = {"decend"}
+-----------------------------------------------
+Para <EMD> ::= “idm” “[“ <EASumRes> “;” <EASumRes> “]”
+
+Primero("idm") = {"idm"}
+-----------------------------------------------
+Para <EMSumRes> ::= <EMMultTra> <EMSumResT>
+
+Primero(<EMMultTra>) = {"idm", "(", "@","{"}
+Primero(<EMMultiEsc>) = {"idm", "(", "@","{"}
+Primero(<ConstMatrix>) = {"{"}
+-----------------------------------------------
+Para <EMSumResT> ::= "+" <EMMultTra> <EMSumResT>
+
+Primero("+") = {"+"}
+-----------------------------------------------
+Para <EMSumResT> ::= "-" <EMMultTra> <EMSumResT> 
+
+Primero("-") = {"-"}
+-----------------------------------------------
+Para <EMSumResT> ::= e
+
+Resultado = {")", ";", ","}
+Primero(e) = {e}
+Siguiente(<EMSumResT>) =
+Siguiente(<EMSumRes>) = {")"}
+Siguiente(<AsignacionT>) = 
+Siguiente(<Asignacion>) = 
+Siguiente(<Sent>) = {";"}
+Siguiente(<DatoEscr>) = 
+Primero(<ListDatoEscrF>) = {","}
+Primero(e) = {e}
+Siguiente(<ListDatoEscrF>) = 
+Siguiente(<ListDatoEscr>) = {")"}
+-----------------------------------------------
+Para <EMMultTra> ::= <EMMultiEsc> <EMMultTraT>
+
+Primero(<EMMultiEsc>) = {"idm", "(", "@","{"}
+-----------------------------------------------
+Para <EMMultTraT> ::= "*" <EMMultiEsc> <EMMultTraT>
+
+Primero("*") = {"*"}
+-----------------------------------------------
+Para <EMMultTraT> ::= e
+
+Resultado = {"+", "-", ")", ";", ",", "}"}
+Primero(e) = {e}
+Siguiente(<EMMultTraT>) = 
+Siguiente(<EMMultTra>) = 
+Primero(<EMSumResT>) = {"+", "-"}
+Primero(e) = {e}
+Siguiente(<EMSumResT>) = {")", ";", ",", "}"}
+-----------------------------------------------
+Para <EMMultiEsc> ::= “idm” <EMMultiEscT>
+
+Primero("idm") = {"idm"}
+-----------------------------------------------
+Para <EMMultiEsc> ::= <ConstMatrix> <EMMultiEscT>
+
+Primero(<ConstMatrix>) = {"{"}
+-----------------------------------------------
+Para <EMMultiEsc> ::= “(“ <EMSumRes> “)” <EMMultiEscT>
+
+Primero("(") = {"("}
+-----------------------------------------------
+Para <EMMultiEsc> ::= "@" "(" <EMSumRes> “)”  <EMMultiEscT>
+
+Primero("@") = {"@"}
+-----------------------------------------------
+Para <EMMultiEscT>::= “^” <Factor> <EMMultiEscT>
+
+Primero("^") = {"^"}
+-----------------------------------------------
+Para <EMMultiEscT>::= e
+
+Resultado = {"*", "+", "-", ")", ";", "," "}"}
+Primero(e) = {e}
+Siguiente(<EMMultiEscT>) = 
+Siguiente(<EMMultiEsc>) = 
+Primero(<EMMultTraT) = {"*"}
+Primero(e) = {e}
+Siguiente(<EMMultTraT>) = 
+Siguiente(<EMMultTra>) = 
+Primero(<EMSumResT>) = {"+", "-"}
+Primero(e) = {e}
+Siguiente(<EMSumResT>) = {")", ";", ",", "}"}
+-----------------------------------------------
+Para <Lectura> ::= “leer" (“ “ConstString” "," "id" “)”
+
+Primero("leer") = {"leer"}
+-----------------------------------------------
+Para <Escritura> ::= “escribir" (“ <ListDatoEscr> “)”
+
+Primero("escribir") = {"escribir"}
+-----------------------------------------------
+Para <ListDatoEscr> ::= <DatoEscr> <ListDatoEscrF>
+
+Primero(<DatoEscr>) = {“ConstString”, "constreal", "id", "idm", "matrix", "(", "sizeCol", "sizeFila", "-", "[", }
+Primero(<EASumRes>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+Primero(<EMSumRes>) = 
+Primero(<EMMultTra>) =
+Primero("matrix") = {"matrix"}
+-----------------------------------------------
+Para <ListDatoEscrF> ::= “,” <ListDatoEscr>
+
+Primero(",") = {","}
+-----------------------------------------------
+Para <ListDatoEscrF> ::= e
+
+Primero(e) = {e}
+Siguiente(<ListDatoEscrF>) = 
+Siguiente(<ListDatoEscr>) = {")"}
+-----------------------------------------------
+Para <DatoEscr> ::= “ConstString”
+
+Primero(“ConstString”) = {“ConstString”}
+-----------------------------------------------
+Para <DatoEscr> ::= <EASumRes>
+
+Primero(<EASumRes>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+-----------------------------------------------
+Para <DatoEscr> ::= "matrix" "(" <EMSumRes> ")"
+
+Primero("matrix") = {"matrix"}
+-----------------------------------------------
+Para <ConstMatrix>::= "{" <Filas> "}"
+
+Primero("{") = {"{"}
+-----------------------------------------------
+Para <Filas>::= "{" <Columnas> "}" <Filas>
+
+Primero("{") = {"{"}
+-----------------------------------------------
+Para <Filas>::= e
+
+Primero(e) = {e}
+Siguiente(<Filas>) = {"}"} 
+Primero("}") = {"}"}
+-----------------------------------------------
+Para <Columnas>::= <EASumRes> <ColumnasT>
+
+Primero(<EASumRes>) = {"constreal", "id", "idm", "(", "sizeCol", "sizeFila", "-"}
+-----------------------------------------------
+Para <ColumnasT>::= "," <Columnas>
+
+Primero(",") = {","}
+-----------------------------------------------
+Para <ColumnasT>::= e
+
+Primero(e) = {e}
+Siguiente(<ColumnasT>) = {"}"}
+Siguiente(<Columnas>) = {"}"}
+Primero("}") = {"}"}
+-----------------------------------------------

@@ -1,0 +1,11 @@
+biliprograma MiCalculo;
+dec
+    Ax : matrix [2; 2];
+    x : real;
+decend;
+
+    Ax := { {1, 2} {3, 4} };
+    x := Ax[1; 2] ** 2;
+    escribir('Resultado: ', x, ' Transpuesta: ', matrix(@(A)));
+
+biliend;
