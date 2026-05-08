@@ -1,0 +1,2 @@
+ 8.Escribir un programa normalice los valores de cada columna
+de una matriz mediante la normalización Min-Max.

@@ -1,0 +1,46 @@
+biliprograma prueba;
+
+dec 
+
+M:matrix[3;3];
+mincol:real;
+maxcol:real;
+i:real;
+j:real;
+k:real;
+decend;
+
+
+
+M:= {{1,2,3}{4,5,6}{7,8,9}};
+escribir(matrix(M));
+escribir(sizeFila(M));
+escribir(sizeCol(M));
+j:=1;
+while(j <= sizeCol(M)) do
+ k:=1;
+ mincol:=100;
+ maxcol:=0;
+ 	while(k <= sizeFila(M)) do
+ 		if(M[k;j] < mincol) then
+	 	mincol := M[k;j];
+		end;
+		if (M[k;j] > maxcol) then
+	 	maxcol := M[k;j];
+		end;
+  	k:=k+1;
+ 	end; 
+ 	
+	escribir('minimo:',mincol,' y maximo:',maxcol);
+	escribir(' ');
+	
+	i:=1;
+	while(i <= sizeFila(M)) do
+	M[i;j]:= (M[i;j] - mincol) / (maxcol - mincol);
+	i:= i +1;
+	end;
+ j := j+1;
+end;
+escribir(matrix(M));
+
+biliend;

@@ -1,0 +1,2 @@
+ 7.Escribir un programa en este lenguaje que ingrese dos matrices
+de NxM las multiplique y muestre la matriz resultante.

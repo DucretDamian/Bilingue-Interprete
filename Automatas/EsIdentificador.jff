@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>&#13;
+	<type>fa</type>&#13;
+	<automaton>&#13;
+		<!--The list of states.-->&#13;
+		<state id="0" name="q0">&#13;
+			<x>45.0</x>&#13;
+			<y>318.0</y>&#13;
+			<initial/>&#13;
+		</state>&#13;
+		<state id="1" name="q1">&#13;
+			<x>129.0</x>&#13;
+			<y>202.0</y>&#13;
+		</state>&#13;
+		<state id="2" name="q2">&#13;
+			<x>329.0</x>&#13;
+			<y>278.0</y>&#13;
+		</state>&#13;
+		<state id="3" name="q3">&#13;
+			<x>470.0</x>&#13;
+			<y>321.0</y>&#13;
+			<final/>&#13;
+		</state>&#13;
+		<!--The list of transitions.-->&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>0</to>&#13;
+			<read>LM</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>2</from>&#13;
+			<to>2</to>&#13;
+			<read>LM</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>2</from>&#13;
+			<to>2</to>&#13;
+			<read>Lm</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>2</from>&#13;
+			<to>2</to>&#13;
+			<read>D</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>2</from>&#13;
+			<to>3</to>&#13;
+			<read>O</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>1</to>&#13;
+			<read>O</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>2</to>&#13;
+			<read>Lm</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>1</to>&#13;
+			<read>D</read>&#13;
+		</transition>&#13;
+		<note>&#13;
+			<text>Automata que reconoce si una cadena es un identificador.
+Los identificadores deben empezar con una letra y puede contener o no digitos
+Debe poseer al menos una letra minuscula (esto para que no se confunca con un identificador de matrix)
+
+LM: Letra en Mayuscula
+Lm: Letra en Minuscula
+D: Digitos
+O: otro, que genera una salida,  donde la cadena podria ser o no un identificador</text>&#13;
+			<x>129.0</x>&#13;
+			<y>33.0</y>&#13;
+		</note>&#13;
+	</automaton>&#13;
+</structure>

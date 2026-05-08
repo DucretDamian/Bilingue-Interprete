@@ -1,0 +1,44 @@
+biliprograma imagen;
+
+dec
+M:matrix[5;5];
+M2:matrix[3;3];
+
+M3:matrix[3;3];
+i:real;
+j:real;
+k:real;
+z:real;
+topecol:real;
+tope:real;
+ac:real;
+decend;
+
+M:={{0,1,2,3,4}{25,55,35,83,89}{203,255,114,101,72}{11,9,7,207,201}{10,8,25,55,5}};
+M2:={{1,0,0}{0,1,1}{0,0,1}};
+M3:={{0,0,0}{0,0,0}{0,0,0}};
+
+k:=1;
+while(k <= sizeFila(M3)) do
+  z:=1;
+  while(z <= sizeCol(M3)) do
+	i:= k;
+        tope:= i + sizeFila(M2);
+        ac:=0;
+	while(i < tope) do
+	j:=z;
+		topecol:= j + sizeCol(M2);
+ 		while(j < topecol) do
+ 		ac:=  M[i;j] * M2[i-k+1;j-z+1] + ac;
+        	j:= j+1;
+ 		end; 
+	 i := i+1;
+	end;
+  M3[k;z]:= ac;
+  z:= z+1;
+  end;
+  k:=k+1;
+end;
+
+escribir(matrix(M3));
+biliend;

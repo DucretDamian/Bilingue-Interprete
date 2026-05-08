@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>&#13;
+	<type>fa</type>&#13;
+	<automaton>&#13;
+		<!--The list of states.-->&#13;
+		<state id="0" name="q0">&#13;
+			<x>108.0</x>&#13;
+			<y>262.0</y>&#13;
+			<initial/>&#13;
+		</state>&#13;
+		<state id="1" name="q1">&#13;
+			<x>246.0</x>&#13;
+			<y>252.0</y>&#13;
+		</state>&#13;
+		<state id="2" name="q2">&#13;
+			<x>244.0</x>&#13;
+			<y>382.0</y>&#13;
+		</state>&#13;
+		<state id="3" name="q3">&#13;
+			<x>385.0</x>&#13;
+			<y>259.0</y>&#13;
+			<final/>&#13;
+		</state>&#13;
+		<!--The list of transitions.-->&#13;
+		<transition>&#13;
+			<from>1</from>&#13;
+			<to>1</to>&#13;
+			<read>D</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>2</to>&#13;
+			<read>O</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>1</from>&#13;
+			<to>2</to>&#13;
+			<read>L</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>2</to>&#13;
+			<read>L</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>1</from>&#13;
+			<to>3</to>&#13;
+			<read>O</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>1</to>&#13;
+			<read>M</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>1</from>&#13;
+			<to>1</to>&#13;
+			<read>M</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>0</from>&#13;
+			<to>2</to>&#13;
+			<read>D</read>&#13;
+		</transition>&#13;
+		<note>&#13;
+			<text>Automata que reconoce si una caddena es un identificador de matriz
+Los Identificadores de matrices debe comensar  con una letra,
+puede contener letras o digitos, 
+pero todas la letras deben estar en mayusculas (esto diferencia entre un identificador de matriz a un identificador)
+
+M: Letras en mayusculas
+D: Digitos
+L: Letras en minusculas
+O: otro, que genera una salida, diciendo que la cadena podria ser o no un identificador de matrices</text>&#13;
+			<x>140.0</x>&#13;
+			<y>20.0</y>&#13;
+		</note>&#13;
+	</automaton>&#13;
+</structure>

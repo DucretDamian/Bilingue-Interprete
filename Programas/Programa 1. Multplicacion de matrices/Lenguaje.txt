@@ -1,0 +1,57 @@
+biliprograma prueba;
+
+dec 
+M1:matrix[2;3];
+M2:matrix[3;2];
+M3:matrix[2;2];
+n1:real;
+n2:real;
+m1:real;
+m2:real;
+i:real;
+j:real;
+aux:real;
+decend;
+
+n1:= sizeFila(M1);
+m1:= sizeCol(M1);
+n2:= sizeFila(M2);
+m2:= sizeCol(M2);
+
+escribir('La matriz M1 es de dimension',n1,'x',m1);
+escribir('La matriz M2 es de dimension',n2,'x',m2);
+escribir(' ');
+escribir('Cargar matriz M1');
+
+i:= 1;
+while (i <= n1) do
+ j:=1;
+ while(j <= m1) do
+	escribir('fila',i,'columna',j,':');
+	leer('--> ',aux);
+	M1[i;j] := aux;
+	j := j+1;
+ end;
+ i:= i+1;
+end;
+escribir(matrix(M1));
+
+i:= 1;
+
+escribir('Cargar matriz M2');
+while (i <= n2) do
+ j:=1;
+ while(j <= m2) do
+	escribir('fila',i,'columna',j,':');
+	leer('--> ',aux);
+	M2[i;j] := aux;
+	j := j + 1;
+ end;
+ i:= i+1;
+end;
+escribir(matrix(M2));
+
+M3 := M1*M2;
+
+escribir(matrix(M3));
+biliend;

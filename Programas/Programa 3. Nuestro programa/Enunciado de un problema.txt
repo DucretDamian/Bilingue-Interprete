@@ -1,0 +1,4 @@
+Suponga que se desea guardar las notas de las materias de un alumno para asi obtener el promedio de cada materia.
+El alumno tiene 4 materias: fisica, quimica, matematica y lengua
+y en cada materia se guarda la nota de cada trimestre.
+Y de cada materia se quiere saber cuales aprobo al final del año

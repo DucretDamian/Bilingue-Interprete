@@ -1,0 +1,91 @@
+biliprograma promedionotas;
+
+dec
+PLANILLA:matrix[4;4];
+MATERIAS:matrix[1;4];
+col:real;
+fila:real;
+nota:real;
+decend;
+
+PLANILLA:= {{1,2,3,4}{0,0,0,0}{0,0,0,0}{0,0,0,0}};
+
+escribir('Cargar notas:');
+escribir(' ');
+escribir('1. Fisica');
+col:=1;
+fila:= 2;
+	while (fila <= 4)do
+	nota:= 0;
+	escribir('nota',fila-1);
+	leer('-->',nota);
+	PLANILLA[fila;col]:= nota;
+	fila:= fila + 1;
+	end;
+col:= col+1;
+
+escribir(' ');
+escribir('2. Quimica');
+fila:= 2;
+	while (fila <= 4)do
+	nota:= 0;
+	escribir('nota',fila-1);
+	leer('-->',nota);
+	PLANILLA[fila;col]:= nota;
+	fila:= fila + 1;
+	end;
+col:= col+1;
+
+
+escribir(' ');
+escribir('3. Matematica');
+fila:= 2;
+	while (fila <= 4)do
+	nota:= 0;
+	escribir('nota',fila-1);
+	leer('-->',nota);
+	PLANILLA[fila;col]:= nota;
+	fila:= fila + 1;
+	end;
+col:= col+1;
+
+
+escribir(' ');
+escribir('4. Lengua');
+fila:= 2;
+	while (fila <= 4)do
+	nota:= 0;
+	escribir('nota',fila-1);
+	leer('-->',nota);
+	PLANILLA[fila;col]:= nota;
+	fila:= fila + 1;
+	end;
+
+escribir(' ');
+
+MATERIAS:= {{0,0,0,0}};
+col:=1;
+
+	while(col <= 4)do
+	fila:= 2;
+		nota:=0;
+		while(fila <= 4)do
+			nota:= nota + PLANILLA[fila;col];
+			fila := fila+1;
+		end;
+		nota:= nota / 3;
+		if (nota >= 6) then
+			MATERIAS[1;col]:= 1;
+		end;
+	col:= col +1;
+	end;
+escribir(' ');
+escribir('El alumno aprobo las materias: ');
+col:=1;
+	while (col <=4) do
+		if ( (MATERIAS[1;col]) >= 1) then
+		escribir(col);
+		end;
+	col:= col + 1;
+	end;
+biliend;
